@@ -1,0 +1,16 @@
+{
+  "name": "exbars",
+  "version": "0.0.1",
+  "description": "A flexible Handlebars view engine for Express",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Youssef Kababe",
+  "license": "MIT",
+  "dependencies": {
+    "handlebars": "^4.0.3",
+    "lodash": "^3.10.1",
+    "walk": "^2.3.9"
+  }
+}
