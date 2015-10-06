@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Exbars by YoussefKababe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Exbars</h1>
+      <h2 class="project-tagline">A flexible Handlebars view engine for Express</h2>
+      <a href="https://github.com/YoussefKababe/exbars" class="btn">View on GitHub</a>
+      <a href="https://github.com/YoussefKababe/exbars/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/YoussefKababe/exbars/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="exbars" class="anchor" href="#exbars" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exbars</h1>
+
+<p>Exbars is a flexible <a href="http://handlebarsjs.com/">Handlebars</a> view engine for <a href="http://expressjs.com/">Express</a>, designed to give developers complete freedom to choose how they want to organize their templates, partials, and helpers.</p>
+
+<h3>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h3>
+
+<div class="highlight highlight-source-shell"><pre>$ npm install --save exbars</pre></div>
+
+<h3>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h3>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> express <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>express<span class="pl-pds">'</span></span>);
+<span class="pl-k">var</span> exbars <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>exbars<span class="pl-pds">'</span></span>);
+
+<span class="pl-k">var</span> app <span class="pl-k">=</span> express();
+
+app.engine(<span class="pl-s"><span class="pl-pds">'</span>hbs<span class="pl-pds">'</span></span>, exbars({defaultLayout<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>main<span class="pl-pds">'</span></span>}));
+app.set(<span class="pl-s"><span class="pl-pds">'</span>view engine<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>hbs<span class="pl-pds">'</span></span>);
+
+app.get(<span class="pl-s"><span class="pl-pds">'</span>/<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-smi">req</span>, <span class="pl-smi">res</span>) {
+  res.render(<span class="pl-s"><span class="pl-pds">'</span>index<span class="pl-pds">'</span></span>, {title<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Welcome!<span class="pl-pds">'</span></span>});
+});
+
+app.listen(<span class="pl-c1">3000</span>);</pre></div>
+
+<p>Your <strong>views/</strong> directory will contain four types of files: Layouts, Templates, Partials, and Helpers.</p>
+
+<h4>
+<a id="layouts" class="anchor" href="#layouts" aria-hidden="true"><span class="octicon octicon-link"></span></a>Layouts</h4>
+
+<p>Layouts live inside the <strong>views/layouts/</strong> directory, they are just a special kind of templates with a {{{body}}} placeholder</p>
+
+<h4>
+<a id="templates" class="anchor" href="#templates" aria-hidden="true"><span class="octicon octicon-link"></span></a>Templates</h4>
+
+<p>Templates are files ending with a '.hbs' extension, with no underscore at the beginning, ex: home.hbs</p>
+
+<h4>
+<a id="partials" class="anchor" href="#partials" aria-hidden="true"><span class="octicon octicon-link"></span></a>Partials</h4>
+
+<p>Each file that starts with an underscore is a partial, ex: _header.hbs, _footer_content.hbs</p>
+
+<p><strong>template.hbs:</strong></p>
+
+<div class="highlight highlight-text-html-handlebars"><pre>&lt;<span class="pl-ent">div</span>&gt;
+  <span class="pl-c1">{{&gt;</span> <span class="pl-v">footerContent</span> <span class="pl-c1">}}</span>
+&lt;/<span class="pl-ent">div</span>&gt;</pre></div>
+
+<h4>
+<a id="helpers" class="anchor" href="#helpers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Helpers</h4>
+
+<p>Helpers are files that end with '_helper.js', ex: date_helper.js</p>
+
+<p>Helpers must also export themselves so they can be available for use in template:</p>
+
+<p><strong>full_name_helper.js:</strong></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c1">module</span>.<span class="pl-en">exports</span> <span class="pl-k">=</span> <span class="pl-k">function</span>(<span class="pl-smi">person</span>) {
+  <span class="pl-k">return</span> persone.firstName <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">'</span> <span class="pl-pds">'</span></span> <span class="pl-k">+</span> person.lastName;
+};</pre></div>
+
+<p><strong>template.hbs:</strong></p>
+
+<div class="highlight highlight-text-html-handlebars"><pre>&lt;<span class="pl-ent">div</span>&gt;
+  <span class="pl-c1">{{</span><span class="pl-v">fullName</span> person<span class="pl-c1">}}</span>
+&lt;/<span class="pl-ent">div</span>&gt;</pre></div>
+
+<p><strong>Notice:</strong> your partials and helpers names will always be transformed from underscore to camelcase!</p>
+
+<h3>
+<a id="views-directory-structure" class="anchor" href="#views-directory-structure" aria-hidden="true"><span class="octicon octicon-link"></span></a>Views directory structure</h3>
+
+<p>You can structure your files anyway you want, depending on your work style and your application logic.</p>
+
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">.</span>
+├── app.js
+└── views
+    ├── contact.hbs
+    ├── _footer.hbs
+    ├── _header.hbs
+    ├── index.hbs
+    ├── layouts
+    │   └── main.hbs
+    ├── login.hbs
+    └── title_helper.js
+
+2 directories, 8 files</pre></div>
+
+<p>You can put your helpers and partials in their own folder if you don't want them mixed with your templates:</p>
+
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">.</span>
+├── app.js
+└── views
+    ├── contact.hbs
+    ├── helpers
+    │   └── title_helper.js
+    ├── index.hbs
+    ├── layouts
+    │   └── main.hbs
+    ├── login.hbs
+    └── partials
+        ├── _footer.hbs
+        └── _header.hbs
+
+4 directories, 8 files</pre></div>
+
+<p>And you can also do something like this:</p>
+
+<div class="highlight highlight-source-shell"><pre><span class="pl-c1">.</span>
+├── app.js
+└── views
+    ├── layouts
+    │   └── main.hbs
+    ├── posts
+    │   ├── edit.hbs
+    │   ├── index.hbs
+    │   ├── new.hbs
+    │   ├── show.hbs
+    │   └── title_helper.js
+    └── users
+        ├── gravatar_helper.js
+        ├── login.hbs
+        ├── profile.hbs
+        └── _social_links.hbs
+
+4 directories, 11 files</pre></div>
+
+<h3>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h3>
+
+<p>Copyright (c) 2015 Youssef Kababe <a href="mailto:hello@youssefkababe.com">hello@youssefkababe.com</a></p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/YoussefKababe/exbars">Exbars</a> is maintained by <a href="https://github.com/YoussefKababe">YoussefKababe</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-36442752-6");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
