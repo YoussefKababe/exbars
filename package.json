@@ -1,6 +1,6 @@
 {
   "name": "exbars",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A flexible Handlebars view engine for Express",
   "main": "index.js",
   "scripts": {
