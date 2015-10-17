@@ -7,6 +7,10 @@ module.exports = function(exbars) {
   return function(name, context) {
     var dirName = path.dirname(exbars.callerPath);
     var partial = partials[path.join(dirName, name)] || partials[name] || partials['views/' + name];
+
+    if (partial === undefined)
+      throw new Error('Failed to lookup partial "' + name + '" in: ' + exbars.callerPath);
+
     compiledPartial = exbars.handlebars.compile(partial, exbars.comilerOptions);
     return new exbars.handlebars.SafeString(compiledPartial(mix(this, context.hash)));
   };
