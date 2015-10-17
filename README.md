@@ -29,15 +29,15 @@ app.listen(3000);
 
 Your **views/** directory will contain four types of files: Layouts, Templates, Partials, and Helpers.
 
-#### Layouts
+### Layouts
 
 Layouts live inside the **views/layouts/** directory, they are just a special kind of templates with a {{{body}}} placeholder
 
-#### Templates
+### Templates
 
 Templates are files ending with a '.hbs' extension, with no underscore at the beginning, ex: home.hbs
 
-#### Partials
+### Partials
 
 Each file that starts with an underscore is a partial, ex: _header.hbs, _footer_content.hbs
 
@@ -45,11 +45,21 @@ Each file that starts with an underscore is a partial, ex: _header.hbs, _footer_
 
 ```handlebars
 <div>
-  {{> footerContent }}
+  {{partial 'footer_content' }}
 </div>
 ```
 
-#### Helpers
+the code above will look for a partial called **_footer_content.hbs** in the same folder as **template.hbs**, if it's not found, it will look under the **views/** folder instead. If you want to include a partial from another folder, let's say **views/partials/_header.hbs**, you need to do something like this:
+
+```handlebars
+<div>
+  {{partial 'partials/header' }}
+</div>
+```
+
+This code will look for the partial **header** inside a folder called **partials** located in the same directory as the view that calls the partial, if it's not found, it will look inside the **views/partials/** folder.
+
+### Helpers
 
 Helpers are files that end with '_helper.js', ex: date_helper.js
 
@@ -71,7 +81,7 @@ module.exports = function(person) {
 </div>
 ```
 
-**Notice:** your partials and helpers names will always be transformed from underscore to camelcase!
+**Notice:** your helper name will always be transformed from underscore to camelcase!
 
 ### Views directory structure
 
