@@ -1,25 +1,52 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html>
   <head>
-    <meta charset="UTF-8">
-    <title>Exbars by YoussefKababe</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-  </head>
-  <body>
-    <section class="page-header">
-      <h1 class="project-name">Exbars</h1>
-      <h2 class="project-tagline">A flexible Handlebars view engine for Express</h2>
-      <a href="https://github.com/YoussefKababe/exbars" class="btn">View on GitHub</a>
-      <a href="https://github.com/YoussefKababe/exbars/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/YoussefKababe/exbars/tarball/master" class="btn">Download .tar.gz</a>
-    </section>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=640">
 
-    <section class="main-content">
-      <h1>
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen">
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
+    <title>Exbars by YoussefKababe</title>
+  </head>
+
+  <body>
+    <a id="forkme_banner" href="https://github.com/YoussefKababe/exbars">View on GitHub</a>
+    <div class="shell">
+
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>Exbars</h1>
+            <h2>A flexible Handlebars view engine for Express</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
+
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/YoussefKababe/exbars/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/YoussefKababe/exbars/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
+      </section>
+
+
+      <span class="banner-fix"></span>
+
+
+      <section id="main_content">
+        <h1>
 <a id="exbars" class="anchor" href="#exbars" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exbars</h1>
 
 <p>Exbars is a flexible <a href="http://handlebarsjs.com/">Handlebars</a> view engine for <a href="http://expressjs.com/">Express</a>, designed to give developers complete freedom to choose how they want to organize their templates, partials, and helpers.</p>
@@ -48,29 +75,37 @@ app.listen(<span class="pl-c1">3000</span>);</pre></div>
 
 <p>Your <strong>views/</strong> directory will contain four types of files: Layouts, Templates, Partials, and Helpers.</p>
 
-<h4>
-<a id="layouts" class="anchor" href="#layouts" aria-hidden="true"><span class="octicon octicon-link"></span></a>Layouts</h4>
+<h3>
+<a id="layouts" class="anchor" href="#layouts" aria-hidden="true"><span class="octicon octicon-link"></span></a>Layouts</h3>
 
 <p>Layouts live inside the <strong>views/layouts/</strong> directory, they are just a special kind of templates with a {{{body}}} placeholder</p>
 
-<h4>
-<a id="templates" class="anchor" href="#templates" aria-hidden="true"><span class="octicon octicon-link"></span></a>Templates</h4>
+<h3>
+<a id="templates" class="anchor" href="#templates" aria-hidden="true"><span class="octicon octicon-link"></span></a>Templates</h3>
 
 <p>Templates are files ending with a '.hbs' extension, with no underscore at the beginning, ex: home.hbs</p>
 
-<h4>
-<a id="partials" class="anchor" href="#partials" aria-hidden="true"><span class="octicon octicon-link"></span></a>Partials</h4>
+<h3>
+<a id="partials" class="anchor" href="#partials" aria-hidden="true"><span class="octicon octicon-link"></span></a>Partials</h3>
 
 <p>Each file that starts with an underscore is a partial, ex: _header.hbs, _footer_content.hbs</p>
 
 <p><strong>template.hbs:</strong></p>
 
 <div class="highlight highlight-text-html-handlebars"><pre>&lt;<span class="pl-ent">div</span>&gt;
-  <span class="pl-c1">{{&gt;</span> <span class="pl-v">footerContent</span> <span class="pl-c1">}}</span>
+  <span class="pl-c1">{{</span><span class="pl-v">partial</span> <span class="pl-s"><span class="pl-pds">'</span>footer_content<span class="pl-pds">'</span></span> <span class="pl-c1">}}</span>
 &lt;/<span class="pl-ent">div</span>&gt;</pre></div>
 
-<h4>
-<a id="helpers" class="anchor" href="#helpers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Helpers</h4>
+<p>the code above will look for a partial called <strong>_footer_content.hbs</strong> in the same folder as <strong>template.hbs</strong>, if it's not found, it will look under the <strong>views/</strong> folder instead. If you want to include a partial from another folder, let's say <strong>views/partials/_header.hbs</strong>, you need to do something like this:</p>
+
+<div class="highlight highlight-text-html-handlebars"><pre>&lt;<span class="pl-ent">div</span>&gt;
+  <span class="pl-c1">{{</span><span class="pl-v">partial</span> <span class="pl-s"><span class="pl-pds">'</span>partials/header<span class="pl-pds">'</span></span> <span class="pl-c1">}}</span>
+&lt;/<span class="pl-ent">div</span>&gt;</pre></div>
+
+<p>This code will look for the partial <strong>header</strong> inside a folder called <strong>partials</strong> located in the same directory as the view that calls the partial, if it's not found, it will look inside the <strong>views/partials/</strong> folder.</p>
+
+<h3>
+<a id="helpers" class="anchor" href="#helpers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Helpers</h3>
 
 <p>Helpers are files that end with '_helper.js', ex: date_helper.js</p>
 
@@ -88,7 +123,7 @@ app.listen(<span class="pl-c1">3000</span>);</pre></div>
   <span class="pl-c1">{{</span><span class="pl-v">fullName</span> person<span class="pl-c1">}}</span>
 &lt;/<span class="pl-ent">div</span>&gt;</pre></div>
 
-<p><strong>Notice:</strong> your partials and helpers names will always be transformed from underscore to camelcase!</p>
+<p><strong>Notice:</strong> your helper name will always be transformed from underscore to camelcase!</p>
 
 <h3>
 <a id="views-directory-structure" class="anchor" href="#views-directory-structure" aria-hidden="true"><span class="octicon octicon-link"></span></a>Views directory structure</h3>
@@ -170,16 +205,23 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.</p>
+      </section>
 
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/YoussefKababe/exbars">Exbars</a> is maintained by <a href="https://github.com/YoussefKababe">YoussefKababe</a>.</span>
-
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/YoussefKababe">YoussefKababe</a> can be found on <a href="https://github.com/YoussefKababe/exbars">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="https://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
       </footer>
 
-    </section>
+    </div>
 
-            <script type="text/javascript">
+              <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
