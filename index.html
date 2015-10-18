@@ -51,6 +51,11 @@
 
 <p>Exbars is a flexible <a href="http://handlebarsjs.com/">Handlebars</a> view engine for <a href="http://expressjs.com/">Express</a>, designed to give developers complete freedom to choose how they want to organize their templates, partials, and helpers.</p>
 
+<p><a href="https://www.npmjs.com/package/exbars"><img src="https://img.shields.io/npm/v/exbars.svg?style=flat-square" alt="Package Version"></a>
+<a href="https://www.npmjs.com/package/exbars"><img src="https://img.shields.io/npm/dt/exbars.svg?style=flat-square" alt="Package Downloads"></a>
+<a href="https://travis-ci.org/YoussefKababe/exbars"><img src="https://img.shields.io/travis/YoussefKababe/exbars.svg?style=flat-square" alt="Travis Build Status"></a>
+<a href="https://david-dm.org/youssefkababe/exbars"><img src="https://img.shields.io/david/youssefkababe/exbars.svg?style=flat-square" alt="Dependencies Status"></a></p>
+
 <h3>
 <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h3>
 
@@ -75,10 +80,29 @@ app.listen(<span class="pl-c1">3000</span>);</pre></div>
 
 <p>Your <strong>views/</strong> directory will contain four types of files: Layouts, Templates, Partials, and Helpers.</p>
 
+<p>If your <strong>views/</strong> directory is somewhere other than the root of your application folder, you need to specify it like this:</p>
+
+<div class="highlight highlight-source-js"><pre>app.engine(<span class="pl-s"><span class="pl-pds">'</span>hbs<span class="pl-pds">'</span></span>, exbars({defaultLayout<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>main<span class="pl-pds">'</span></span>, viewsPath<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>app/views<span class="pl-pds">'</span></span>}));
+
+app.set(<span class="pl-s"><span class="pl-pds">'</span>views<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>app/views<span class="pl-pds">'</span></span>);
+app.set(<span class="pl-s"><span class="pl-pds">'</span>view engine<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>hbs<span class="pl-pds">'</span></span>);</pre></div>
+
 <h3>
 <a id="layouts" class="anchor" href="#layouts" aria-hidden="true"><span class="octicon octicon-link"></span></a>Layouts</h3>
 
 <p>Layouts live inside the <strong>views/layouts/</strong> directory, they are just a special kind of templates with a {{{body}}} placeholder</p>
+
+<p>Render a view with another layout:</p>
+
+<div class="highlight highlight-source-js"><pre>app.get(<span class="pl-s"><span class="pl-pds">'</span>/<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-smi">req</span>, <span class="pl-smi">res</span>) {
+  res.render(<span class="pl-s"><span class="pl-pds">'</span>index<span class="pl-pds">'</span></span>, {title<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Welcome!<span class="pl-pds">'</span></span>, layout<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>other_layout<span class="pl-pds">'</span></span>});
+});</pre></div>
+
+<p>Render a view with no layouts:</p>
+
+<div class="highlight highlight-source-js"><pre>app.get(<span class="pl-s"><span class="pl-pds">'</span>/<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-smi">req</span>, <span class="pl-smi">res</span>) {
+  res.render(<span class="pl-s"><span class="pl-pds">'</span>index<span class="pl-pds">'</span></span>, {title<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Welcome!<span class="pl-pds">'</span></span>, layout<span class="pl-k">:</span> <span class="pl-c1">false</span>});
+});</pre></div>
 
 <h3>
 <a id="templates" class="anchor" href="#templates" aria-hidden="true"><span class="octicon octicon-link"></span></a>Templates</h3>
