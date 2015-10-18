@@ -34,7 +34,7 @@ app.listen(3000);
 
 Your **views/** directory will contain four types of files: Layouts, Templates, Partials, and Helpers.
 
-If your **views/** directory is somewhere other than ther root of your application folder, you need to specify it like this:
+If your **views/** directory is somewhere other than the root of your application folder, you need to specify it like this:
 
 ```javascript
 app.engine('hbs', exbars({defaultLayout: 'main', viewsPath: 'app/views'}));
