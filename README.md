@@ -3,6 +3,11 @@ Exbars
 
 Exbars is a flexible [Handlebars](http://handlebarsjs.com/) view engine for [Express](http://expressjs.com/), designed to give developers complete freedom to choose how they want to organize their templates, partials, and helpers.
 
+[![Package Version](https://img.shields.io/npm/v/exbars.svg?style=flat-square)](https://www.npmjs.com/package/exbars)
+[![Package Downloads](https://img.shields.io/npm/dt/exbars.svg?style=flat-square)](https://www.npmjs.com/package/exbars)
+[![Travis Build Status](https://img.shields.io/travis/YoussefKababe/exbars.svg?style=flat-square)](https://travis-ci.org/YoussefKababe/exbars)
+[![Dependencies Status](https://img.shields.io/david/youssefkababe/exbars.svg?style=flat-square)](https://david-dm.org/youssefkababe/exbars)
+
 ### Installation
 
 ```bash
@@ -29,9 +34,34 @@ app.listen(3000);
 
 Your **views/** directory will contain four types of files: Layouts, Templates, Partials, and Helpers.
 
+If your **views/** directory is somewhere other than ther root of your application folder, you need to specify it like this:
+
+```javascript
+app.engine('hbs', exbars({defaultLayout: 'main', viewsPath: 'app/views'}));
+
+app.set('views', 'app/views');
+app.set('view engine', 'hbs');
+```
+
 ### Layouts
 
 Layouts live inside the **views/layouts/** directory, they are just a special kind of templates with a {{{body}}} placeholder
+
+Render a view with another layout:
+
+```javascript
+app.get('/', function(req, res) {
+  res.render('index', {title: 'Welcome!', layout: 'other_layout'});
+});
+```
+
+Render a view with no layouts:
+
+```javascript
+app.get('/', function(req, res) {
+  res.render('index', {title: 'Welcome!', layout: false});
+});
+```
 
 ### Templates
 
