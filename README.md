@@ -6,6 +6,8 @@ Exbars is a flexible [Handlebars](http://handlebarsjs.com/) view engine for [Exp
 [![Package Version](https://img.shields.io/npm/v/exbars.svg?style=flat-square)](https://www.npmjs.com/package/exbars)
 [![Package Downloads](https://img.shields.io/npm/dt/exbars.svg?style=flat-square)](https://www.npmjs.com/package/exbars)
 [![Travis Build Status](https://img.shields.io/travis/YoussefKababe/exbars.svg?style=flat-square)](https://travis-ci.org/YoussefKababe/exbars)
+[![Code Climate](https://img.shields.io/codeclimate/github/YoussefKababe/exbars.svg?style=flat-square)](https://codeclimate.com/github/YoussefKababe/exbars)
+[![Test Coverage](https://img.shields.io/codeclimate/coverage/github/YoussefKababe/exbars.svg?style=flat-square)](https://codeclimate.com/github/YoussefKababe/exbars)
 [![Dependencies Status](https://img.shields.io/david/youssefkababe/exbars.svg?style=flat-square)](https://david-dm.org/youssefkababe/exbars)
 
 ### Installation

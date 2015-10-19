@@ -2,6 +2,9 @@ language: node_js
 node_js:
   - stable
   - 4.2.1
+addons:
+  code_climate:
+    repo_token: b598407e64cbfff98ce8ee82924c9640b3a5ed858258e361e4f3a31495b59762
 notifications:
   email:
     on_success: always

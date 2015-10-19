@@ -11,7 +11,7 @@ module.exports = function(exbars) {
     if (partial === undefined)
       throw new Error('Failed to lookup partial "' + name + '" in: ' + exbars.callerPath);
 
-    compiledPartial = exbars.handlebars.compile(partial, exbars.comilerOptions);
+    var compiledPartial = exbars.handlebars.compile(partial, exbars.comilerOptions);
     return new exbars.handlebars.SafeString(compiledPartial(mix(this, context.hash)));
   };
 };
