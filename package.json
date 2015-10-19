@@ -4,7 +4,8 @@
   "description": "A flexible Handlebars view engine for Express",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "cover": "istanbul cover _mocha"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
     "walk": "^2.3.9"
   },
   "devDependencies": {
+    "istanbul": "^0.4.0",
     "mocha": "^2.3.3"
   }
 }
