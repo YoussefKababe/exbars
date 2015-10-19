@@ -45,6 +45,7 @@ describe('Exbars', function() {
       exbars.compile('someTemplate', '<h1>{{title}}</h1>');
       exbars.compile('templateWithHelper', "<h1>{{someHelper 'hello'}}</h1>");
       exbars.compile('templateWithPartial', "<h1>{{partial 'some_partial'}}</h1>");
+      exbars.compile('templateWithNFPartial', "<h1>{{partial 'not_found_partial'}}</h1>");
       exbars.compile(exbars.viewsPath + '/layouts/main.hbs', '<div>{{{body}}}</div>');
       exbars.compile(exbars.viewsPath + '/layouts/other.hbs', '<section>{{{body}}}</section>');
       exbars.registerHelper('someHelper', function(string) { return string.toUpperCase(); });
@@ -109,6 +110,13 @@ describe('Exbars', function() {
         result.should.equal('<h1><p>This is a partial</p></h1>');
         done();
       });
+    });
+
+    it('should throw an error if partial is not found', function() {
+      var fn = function() {
+        exbars.render('templateWithNFPartial', {}, function(err, result) {});
+      };
+      fn.should.throw('Failed to lookup partial "not_found_partial" in: pages/login.hbs');
     });
   });
 });
