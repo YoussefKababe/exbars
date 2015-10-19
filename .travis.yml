@@ -7,7 +7,7 @@ addons:
     repo_token: b598407e64cbfff98ce8ee82924c9640b3a5ed858258e361e4f3a31495b59762
 after_script:
   - npm run cover
-  - codeclimate-test-reporter < coverage/lcov.info
+  - npm run report-cov
 notifications:
   email:
     on_success: always
