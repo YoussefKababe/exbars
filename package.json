@@ -4,8 +4,7 @@
   "description": "A flexible Handlebars view engine for Express",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
-    "cover": "istanbul cover _mocha",
+    "test": "istanbul cover _mocha",
     "report-cov": "codeclimate-test-reporter < coverage/lcov.info"
   },
   "repository": {
