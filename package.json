@@ -4,7 +4,7 @@
   "description": "A flexible Handlebars view engine for Express",
   "main": "index.js",
   "scripts": {
-    "test": "istanbul cover _mocha",
+    "test": "istanbul cover node_modules/mocha/bin/_mocha",
     "report-cov": "codeclimate-test-reporter < coverage/lcov.info"
   },
   "repository": {
@@ -22,15 +22,15 @@
   "author": "Youssef Kababe",
   "license": "MIT",
   "dependencies": {
-    "chai": "^3.5.0",
-    "handlebars": "^4.0.5",
-    "lodash": "^4.8.2",
-    "mixin-deep": "^1.1.3",
-    "walk": "^2.3.9"
+    "chai": "3.x",
+    "handlebars": "4.x",
+    "lodash": "4.x",
+    "mixin-deep": "1.x",
+    "walk": "2.x"
   },
   "devDependencies": {
-    "codeclimate-test-reporter": "^0.3.1",
-    "istanbul": "^0.4.3",
-    "mocha": "^2.4.5"
+    "codeclimate-test-reporter": "0.x",
+    "istanbul": "0.x",
+    "mocha": "2.x"
   }
 }
