@@ -1,8 +1,8 @@
-var Exbars = require('./lib/exbars.js');
+var path = require('path');
+var Exbars = require(path.join(__dirname, 'lib/exbars.js'));
+var string = require('lodash/string');
 var walk = require('walk');
 var fs = require('fs');
-var path = require('path');
-var string = require('lodash/string');
 
 module.exports = function(options, callback) {
   var exbars = new Exbars(options);
