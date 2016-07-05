@@ -19,8 +19,7 @@ module.exports = function(options, callback) {
         break;
       case /^_[a-z0-9_-]+[^_].hbs$/i.test(fileStats.name):
         fs.readFile(path.join(root, fileStats.name), function(err, data) {
-          exbars.registerPartial(root.replace(viewsPath + '/', '') + '/' +
-            string.snakeCase(path.basename(fileStats.name, '.hbs')), data.toString());
+          exbars.registerPartial(path.join(path.relative(viewsPath, root), string.snakeCase(path.basename(fileStats.name, '.hbs'))), data.toString());
           next();
         });
         break;
