@@ -1,5 +1,7 @@
+var path = require('path');
+var Engine = require(path.join(__dirname, '../index.js'));
 var should = require('chai').should();
-var Engine = require('../index');
+var os = require('os');
 
 describe('Engine', function() {
   var engine;
@@ -33,18 +35,18 @@ describe('Engine', function() {
 
   it('should render template with a partial in the same folder', function(done) {
     engine(process.cwd() + '/test/views/pages/index.hbs', {layout: false}, function(err, content) {
-      content.should.equal('<p>pages/index</p>\n<p>pages/links</p>');
+      content.should.equal('<p>pages/index</p>'+os.EOL+'<p>pages/links</p>');
       done();
     });
   });
 
   it('should render template with a partial in an another folder', function(done) {
     engine(process.cwd() + '/test/views/home.hbs', {layout: false}, function(err, content) {
-      content.should.equal('<p>home</p>\n<p>partials/widget</p>');
+      content.should.equal('<p>home</p>'+os.EOL+'<p>partials/widget</p>');
     });
 
     engine(process.cwd() + '/test/views/users/index.hbs', {layout: false}, function(err, content) {
-      content.should.equal('<p>users/index</p>\n<p>users/partials/widget</p>');
+      content.should.equal('<p>users/index</p>'+os.EOL+'<p>users/partials/widget</p>');
       done();
     });
   });

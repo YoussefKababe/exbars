@@ -1,5 +1,6 @@
+var path = require('path');
 var should = require('chai').should();
-var Exbars = require('../lib/exbars');
+var Exbars = require(path.join(__dirname, '../lib/exbars.js'));
 
 describe('Exbars', function() {
   var exbars = new Exbars({});
@@ -46,8 +47,8 @@ describe('Exbars', function() {
       exbars.compile('templateWithHelper', "<h1>{{someHelper 'hello'}}</h1>");
       exbars.compile('templateWithPartial', "<h1>{{partial 'some_partial'}}</h1>");
       exbars.compile('templateWithNFPartial', "<h1>{{partial 'not_found_partial'}}</h1>");
-      exbars.compile(exbars.viewsPath + '/layouts/main.hbs', '<div>{{{body}}}</div>');
-      exbars.compile(exbars.viewsPath + '/layouts/other.hbs', '<section>{{{body}}}</section>');
+      exbars.compile(path.join(exbars.viewsPath,  'layouts/main.hbs'), '<div>{{{body}}}</div>');
+      exbars.compile(path.join(exbars.viewsPath, 'layouts/other.hbs'), '<section>{{{body}}}</section>');
       exbars.registerHelper('someHelper', function(string) { return string.toUpperCase(); });
       exbars.registerPartial('some_partial', '<p>This is a partial</p>');
     });
@@ -116,7 +117,7 @@ describe('Exbars', function() {
       var fn = function() {
         exbars.render('templateWithNFPartial', {}, function(err, result) {});
       };
-      fn.should.throw('Failed to lookup partial "not_found_partial" in: pages/login.hbs');
+      fn.should.throw('Failed to lookup partial "not_found_partial" in: '+path.join('pages', 'login.hbs'));
     });
   });
 });

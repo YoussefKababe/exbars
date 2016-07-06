@@ -1,8 +1,8 @@
-var Exbars = require('./lib/exbars.js');
+var path = require('path');
+var Exbars = require(path.join(__dirname, 'lib/exbars.js'));
+var string = require('lodash/string');
 var walk = require('walk');
 var fs = require('fs');
-var path = require('path');
-var string = require('lodash/string');
 
 module.exports = function(options, callback) {
   var exbars = new Exbars(options);
@@ -19,8 +19,7 @@ module.exports = function(options, callback) {
         break;
       case /^_[a-z0-9_-]+[^_].hbs$/i.test(fileStats.name):
         fs.readFile(path.join(root, fileStats.name), function(err, data) {
-          exbars.registerPartial(root.replace(viewsPath + '/', '') + '/' +
-            string.snakeCase(path.basename(fileStats.name, '.hbs')), data.toString());
+          exbars.registerPartial(path.join(path.relative(viewsPath, root), string.snakeCase(path.basename(fileStats.name, '.hbs'))), data.toString());
           next();
         });
         break;
